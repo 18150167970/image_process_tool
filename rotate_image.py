@@ -1,6 +1,7 @@
 # Copyright 2020 chenli Authors. All Rights Reserved.
 # This file in order to  rotate rectangle object image
 # 该文件是为了旋转有长方形目标的图像，校正为水平方向，只能水平校正，不能三维校正。
+# 原理：使用霍夫变换来寻找图像中的目标斜率，找到最频繁的一条斜率作为校正方向，使用scipy.ndimage进行校正
 import numpy as np
 import cv2
 import math
@@ -122,6 +123,7 @@ if __name__ == '__main__':
     imgs = rotate_image(image)
     rotate_time = time.time()
     print("rotate_time:", rotate_time - start)
+    cv2.imshow("orgin", image)
     cv2.imshow("image", imgs)
     cv2.waitKey()
     cv2.destroyAllWindows()
